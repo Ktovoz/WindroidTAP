@@ -53,17 +53,18 @@ WindroidTAP is a cross-platform test automation framework for Windows and Androi
 
 🌐 Visit my website for more information: [ktovoz.com](https://ktovoz.com)
 
-## �� Table of Contents
+## 📚 Table of Contents
 
 - [Key Features](#key-features)
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
 - [Dependencies](#dependencies)
 - [Usage Examples](#usage-examples)
+- [FAQ](#faq)
 - [Contributing](#contributing)
-- [Changelog](#changelog)
 - [License](#license)
 - [Contact](#contact)
+- [Future Development](#future-development)
 
 ## 🎯 Key Features
 
@@ -234,4 +235,28 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <div align="center">
   <h3>🏷️ Tags</h3>
   <p>#AutomationTesting #Windows #Android #Python #CrossPlatform #Testing</p>
-</div> 
+</div>
+
+## 🔮 Future Development
+
+### 🌐 Web Service Transformation
+- Encapsulate existing functionalities into RESTful APIs using FastAPI
+- Provide comprehensive API documentation and Swagger UI interface
+- Support asynchronous operations and concurrent task processing
+
+### 🎨 Visual Operation Interface
+- Develop modern HTML5-based web interface
+- Intuitive test case orchestration
+- Real-time operation preview and result feedback
+- Support record and playback functionality
+
+### 📊 Test Management Platform
+- Test case management and version control
+- Test result data visualization
+- Automated test report generation
+- Multi-user collaboration support
+
+### 🔄 CI Integration
+- Provide CI/CD integration interfaces
+- Support platforms like Jenkins, GitHub Actions
+- Automated test result feedback 
