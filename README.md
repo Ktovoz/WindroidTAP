@@ -1,5 +1,4 @@
 # 🤖 WindroidTAP
-
 <div align="center">
 
 [![Python Version](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
@@ -12,12 +11,14 @@
 </div>
 
 <div align="center">
+  <h3>🌟 Cross-platform Automated Testing Framework</h3>
   <h3>🌟 跨平台自动化测试框架</h3>
+  <p>A unified automated testing solution for Windows and Android applications</p>
   <p>适用于 Windows 和 Android 应用程序的统一自动化测试解决方案</p>
 </div>
 
 <div align="center">
-  <h3>📢 文档</h3>
+  <h3>📢 Documentation | 文档</h3>
   <p>
     <a href="README_en.md">English</a> | 
     <a href="README.md">中文</a>
@@ -25,7 +26,8 @@
 </div>
 
 <div align="center">
-  <h3>📌 重要提示</h3>
+  <h3>📌 Important Notice | 重要提示</h3>
+  <p>This project is under active development. APIs may change. Please stay tuned for updates.</p>
   <p>本项目仍在积极开发中，API 可能会有变动。请定期关注更新。</p>
 </div>
 
