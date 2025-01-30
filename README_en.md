@@ -55,16 +55,16 @@ WindroidTAP is a cross-platform test automation framework for Windows and Androi
 
 ## 📚 Table of Contents
 
-- [Key Features](#key-features)
-- [Quick Start](#quick-start)
-- [Project Structure](#project-structure)
-- [Dependencies](#dependencies)
-- [Usage Examples](#usage-examples)
-- [FAQ](#faq)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-- [Future Development](#future-development)
+- [Key Features](#-key-features)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Dependencies](#-dependencies)
+- [Usage Examples](#-usage-examples)
+- [FAQ](#-faq)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Contact](#-contact)
+- [Future Development](#-future-development)
 
 ## 🎯 Key Features
 
