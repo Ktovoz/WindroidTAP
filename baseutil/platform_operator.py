@@ -1,5 +1,4 @@
 from typing import Optional, Union, List, Tuple
-from PIL.Image import Image
 from .app.app_OP import AppOperator
 from .win.winOperate.mouse_op import MouseOperations
 from .win.winOperate.keyboard_op import KeyboardOperations
@@ -44,7 +43,7 @@ class PlatformOperator:
         operator = AppOperator(ip=ip, port=port)
         self.click = operator.click
         self.input_text = operator.input_text
-        self.screenshot = operator.capture_png
+        self.screenshot = operator.capture_jpg
         self.swipe = operator.swipe
         self.get_size = operator.get_size
         
