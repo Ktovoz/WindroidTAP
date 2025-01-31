@@ -2,7 +2,7 @@ import time
 import keyboard
 from loguru import logger
 from typing import Union, List
-from base import BaseWindowOperations
+from .base import BaseWindowOperations
 
 class KeyboardOperations(BaseWindowOperations):
     @BaseWindowOperations.check_activation

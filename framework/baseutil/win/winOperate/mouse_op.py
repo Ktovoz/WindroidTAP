@@ -2,7 +2,7 @@ import pyautogui
 from loguru import logger
 from typing import Optional
 from PIL.Image import Image
-from base import BaseWindowOperations
+from .base import BaseWindowOperations
 
 class MouseOperations(BaseWindowOperations):
     _ALLOWED_BUTTONS = {'left', 'right'}

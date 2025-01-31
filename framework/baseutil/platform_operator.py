@@ -1,7 +1,6 @@
 from typing import Optional, Union, List, Tuple
-from .app.app_OP import AppOperator
-from .win.winOperate.mouse_op import MouseOperations
-from .win.winOperate.keyboard_op import KeyboardOperations
+from .app import App
+from .win import WindowUtils
 from loguru import logger
 
 class PlatformOperator:
@@ -40,12 +39,12 @@ class PlatformOperator:
 
     def _init_app(self, ip: str, port: int):
         """初始化APP平台操作方法"""
-        operator = AppOperator(ip=ip, port=port)
-        self.click = operator.click
-        self.input_text = operator.input_text
-        self.screenshot = operator.capture_jpg
-        self.swipe = operator.swipe
-        self.get_size = operator.get_size
+        self._app = App(ip=ip, port=port)
+        self.click = self._app.click
+        self.input_text = self._app.input_text
+        self.screenshot = self._app.capture_jpg
+        self.swipe = self._app.swipe
+        self.get_size = self._app.get_size
         
         # APP平台不支持的方法
         def _not_supported(*args, **kwargs):
@@ -55,17 +54,22 @@ class PlatformOperator:
 
     def _init_windows(self, window_title: Optional[str], window_handle: Optional[int]):
         """初始化Windows平台操作方法"""
-        mouse_op = MouseOperations(window_title=window_title, window_handle=window_handle)
-        keyboard_op = KeyboardOperations(window_title=window_title, window_handle=window_handle)
+        if window_handle:
+            self._win = WindowUtils.create_operation(window_handle)
+        else:
+            self._win = WindowUtils.operate_window(window_title)
+            if not self._win:
+                raise ValueError(f"未找到标题包含 '{window_title}' 的窗口")
         
-        self.click = mouse_op.click
-        self.screenshot = mouse_op.screenshot
-        self.swipe = mouse_op.drag
-        self.input_text = keyboard_op.type_text
-        self.press_keys = keyboard_op.press_key
-        self.hotkey = keyboard_op.hotkey
+        # 映射方法
+        self.click = lambda x, y: self._win.click(x, y)
+        self.screenshot = self._win.screenshot
+        self.swipe = self._win.drag
+        self.input_text = self._win.type_text
+        self.press_keys = self._win.press_key
+        self.hotkey = self._win.hotkey
         
         def _get_win_size():
-            rect = mouse_op._get_window_rect()
+            rect = self._win._get_window_rect()
             return (rect[2], rect[3]) if rect else None
         self.get_size = _get_win_size 

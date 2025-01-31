@@ -1,6 +1,7 @@
 from typing import List, Set, Tuple, Optional, Union
 from loguru import logger
-import imgTool, paddlTool
+from .imgTool import ImageProcessor
+from .paddlTool import PaddleOCRTool
 
 
 class OcrActions:
@@ -21,6 +22,8 @@ class OcrActions:
             region_of_interest: 感兴趣区域的坐标点列表，格式为[[x1,y1], [x2,y2], [x3,y3], [x4,y4]]
         """
         self.region_of_interest = region_of_interest
+        self.image_processor = ImageProcessor()
+        self.paddle_ocr = PaddleOCRTool()  # 初始化 PaddleOCR 工具类实例
 
     def set_region_of_interest(self, point):
         """
@@ -43,7 +46,7 @@ class OcrActions:
         """
         try:
             if self.region_of_interest:
-                return imgTool.crop_image_by_corners(image_input, self.region_of_interest)
+                return self.image_processor.crop_image_by_corners(image_input, self.region_of_interest)
             return image_input
         except Exception as e:
             logger.error(f"图像裁剪失败: {e}")
@@ -86,7 +89,7 @@ class OcrActions:
             
         try:
             cropped_image = self._crop_image(image_input)
-            return paddlTool.filter_and_select_text(cropped_image, search_text)
+            return self.paddle_ocr.filter_and_select_text(cropped_image, search_text)
         except Exception as e:
             logger.error(f"OCR搜索文本失败: {e}, 图像: {image_input}, 搜索文本: {search_text}")
             return None
@@ -107,7 +110,7 @@ class OcrActions:
             
         try:
             cropped_image = self._crop_image(image_input)
-            return paddlTool.filter_ocr_results(cropped_image)
+            return self.paddle_ocr.filter_ocr_results(cropped_image)
         except Exception as e:
             logger.error(f"提取所有文本失败: {e}, 图像: {image_input}")
             return []
