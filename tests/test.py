@@ -1,7 +1,8 @@
 import unittest
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 import os
 import sys
+import time
 
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -20,11 +21,15 @@ class TestOCRAndPlatformOperations(unittest.TestCase):
         # 创建OCR操作实例
         self.ocr = OcrActions()
         
-        # 创建Windows平台操作实例，使用MagicMock模拟
-        self.win_op = MagicMock(spec=PlatformOperator)
-        self.win_op.platform = 'windows'
-        self.win_op.window_title = '测试窗口'
-        self.win_op._init_windows = MagicMock()  # 模拟初始化窗口的方法
+        # 创建Windows平台操作实例 - 更新为记事本
+        self.win_op = PlatformOperator(
+            platform='windows',
+            window_title='记事本'
+        )
+        
+        # 启动记事本进程
+        os.system('notepad.exe')
+        time.sleep(1)  # 等待记事本启动
 
     def test_ocr_region_of_interest(self):
         """测试OCR感兴趣区域设置功能"""
@@ -128,9 +133,38 @@ class TestOCRAndPlatformOperations(unittest.TestCase):
         mock_crop.assert_called_with("test.png", test_roi)
         self.assertEqual(result, b"cropped_image_data")
 
+    def test_notepad_interactions(self):
+        """测试与记事本的实际交互"""
+        test_text = "这是一段测试文本\n包含多行内容\n用于测试记事本操作"
+        
+        # 测试文本输入
+        self.win_op.input_text(test_text)
+        time.sleep(0.5)
+        
+        # 测试全选操作
+        self.win_op.hotkey('ctrl', 'a')
+        time.sleep(0.5)
+        
+        # 测试复制操作
+        self.win_op.hotkey('ctrl', 'c')
+        time.sleep(0.5)
+        
+        # 测试删除操作
+        self.win_op.input_text('{BACKSPACE}')
+        time.sleep(0.5)
+        
+        # 测试粘贴操作
+        self.win_op.hotkey('ctrl', 'v')
+        time.sleep(0.5)
+
     def tearDown(self):
         """测试后的清理工作"""
-        pass
+        # 关闭记事本而不保存
+        self.win_op.hotkey('alt', 'f4')
+        time.sleep(0.5)
+        self.win_op.input_text('n')  # 在弹出的保存对话框中选择"不保存"
+        
+        super().tearDown()
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
